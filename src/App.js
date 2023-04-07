@@ -13,7 +13,7 @@ function App() {
         const eeid = params.get('eeid');
         if (eeid) {
           setEeid(eeid);
-          const response = await axios.get(`http://localhost:3001/components?eeid=${eeid}`);
+          const response = await axios.get(`https://localhost:3001/components?eeid=${eeid}`);
           setComponents(response.data.value);
         } else {
           console.warn('No valid Application EEID specified');
