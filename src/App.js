@@ -47,7 +47,7 @@ function App() {
     try {
       const architectureName = components[0].ArchitectureName;
       const applicationName = components[0].Name;
-      await axios.post('https://localhost:3001/components', {
+      await axios.post('http://localhost:3001/components', {
         architectureName,
         applicationName
       });
