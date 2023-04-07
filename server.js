@@ -60,6 +60,7 @@ async function getComponents(req) {
   }
 }
 
+
 app.get('/components', async (req, res) => {
   try {
     const components = await getComponents(req);
