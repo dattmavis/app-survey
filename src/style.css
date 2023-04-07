@@ -1,83 +1,163 @@
 /* Body styles */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    background-color: #f5f5f5;
-    color: #333;
-  }
-  
-  /* Container styles */
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  background-color: #F5F5F5;
+  color: #1F1F1F;
+}
+
+
+/* Container styles */
+.survey-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  border-left: 5px solid #FF8C42;
+}
+
+@media only screen and (min-width: 768px) {
   .survey-container {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
   }
-  
-  /* Heading styles */
-  h1 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 32px;
-    font-weight: 700;
+}
+
+
+.survey-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 3px;
+}
+
+.title-container {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* New container styles */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  padding: 10px 30px;
+}
+
+/* Logo container styles */
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+@media screen and (max-width: 600px) {
+  /* Logo container styles on mobile */
+  .logo-container {
+    order: -1;
+    margin: 0;
   }
-  
-  /* Form styles */
-  form {
-    margin-top: 30px;
-  }
-  
-  /* Question container styles */
-  .question-container label {
-    display: block;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  /* Question label styles */
-  .question {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 20px;
-    font-weight: 600;
-  }
-  
-  /* Answer select styles */
-  .answer {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #f5f5f5;
-    color: #333;
-    font-size: 16px;
-    font-weight: 400;
-    appearance: none;
-    margin-bottom: 20px;
-  }
-  
-  /* Submit button styles */
-  button[type="submit"] {
-    display: block;
-    margin-top: 30px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0062cc;
-  }
-  
+}
+
+/* Heading styles */
+h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1F1F1F;
+}
+
+/* Form styles */
+form {
+  margin-top: 30px;
+}
+
+/* Question container styles */
+.question-container {
+  margin-bottom: 30px;
+}
+
+.question-container label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #1F1F1F;
+}
+
+/*Question Title Styles*/
+
+.question-title {
+  display: flex;
+  align-items: center;
+}
+
+.question-title h2 {
+  margin-right: 10px;
+}
+
+
+/* Question label styles */
+.question {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1F1F1F;
+}
+
+/* Answer select styles */
+.answer {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #F5F5F5;
+  color: #1F1F1F;
+  font-size: 16px;
+  font-weight: 400;
+  appearance: none;
+  margin-bottom: 20px;
+}
+
+/* Submit button styles */
+button[type="submit"] {
+  display: block;
+  margin-top: 30px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FF8C42;
+  color: #F5F5F5;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button[type="submit"]:hover {
+  background-color: #FF5E14;
+}
+
+
+/* Description styles */
+.description {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  border-left: 5px solid #FF8C42;
+}

@@ -70,6 +70,23 @@ app.get('/components', async (req, res) => {
   }
 });
 
+app.get('/questions', async (req, res) => {
+  try {
+    const response = await axios.get(`${API_URL}/api/ComponentTypes?$filter=Name eq 'Application Survey'&$expand=Properties($filter=Type eq 'Q')`, {
+      headers: {
+        Authorization: `Bearer ${await getToken()}`
+      }
+    });
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching data from API');
+  }
+});
+
+
+
 app.post('/components', async (req, res) => {
   try {
     const { architectureName, applicationName } = req.body;
@@ -92,12 +109,14 @@ app.post('/components', async (req, res) => {
     const componentResponse = await createComponent;
     console.log('Component Response Body:', componentResponse.data);
 
+    const sourceComponentEEID = componentResponse.data.EEID;
+
     const connectionData = {
       Name: 'Application Survey Connection',
       ArchitectureName: architectureName,
       ConnectionTypeName: 'Surveyed',
-      SourceComponentName: `Application Survey for ${applicationName}`,
-      SinkComponentName: applicationName
+      SourceComponentEEID: sourceComponentEEID,
+      SinkComponentEEID: req.query.eeid,
     };
 
     // Wait 5 seconds before creating the connection
