@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start-server\" \"npm run start-react\"",
-    "start-react": "react-scripts start",
+    "start-react": "set PORT=3030 && react-scripts start ./src/index.js",
     "start-server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,7 +48,7 @@
     ]
   },
   "devDependencies": {
-    "dotenv-webpack": "^8.0.1",
-    "concurrently": "^6.4.0"
+    "concurrently": "^6.5.1",
+    "dotenv-webpack": "^8.0.1"
   }
 }
