@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./style.css";
 
+
+
 function App() {
   const [components, setComponents] = useState([]);
   const [eeid, setEeid] = useState("");
@@ -16,7 +18,6 @@ function App() {
       [questionName]: answer,
     });
   };
-  
 
   useEffect(() => {
     async function fetchComponents() {
@@ -47,9 +48,23 @@ function App() {
     fetchComponents();
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(answers);
+
+    const surveyData = {
+      applicationName: components[0].Name,
+      architectureName: components[0].ArchitectureName,
+      answers,
+    };
+
+    console.log("Survey data to be sent:", surveyData);
+
+    try {
+      await axios.post("http://localhost:3001/components", surveyData);
+      console.log("Survey data saved");
+    } catch (error) {
+      console.error("Error saving survey data:", error.message);
+    }
   };
 
   useEffect(() => {
@@ -79,6 +94,7 @@ function App() {
   }
 
   return (
+
     <div className="survey-container">
       <div className="header-container">
         <div className="title-container">
@@ -103,9 +119,9 @@ function App() {
           <img src="logo.png" alt="Logo" className="logo" />
         </div>
       </div>
-  
+
       <hr />
-  
+
       {components.length > 0 && (
         <form onSubmit={handleSubmit}>
           <div className="question-container">
@@ -135,13 +151,10 @@ function App() {
                 <div className="question-answer">
                   <select
                     className="answer"
-                    name={question.name.toLowerCase()}
-                    value={answers[question.name.toLowerCase()]}
+                    name={question.name}
+                    value={answers[question.name]}
                     onChange={(e) =>
-                      handleAnswerChange(
-                        question.name.toLowerCase(),
-                        e.target.value
-                      )
+                      handleAnswerChange(question.name, e.target.value)
                     }
                   >
                     <option value="">Select An Answer</option>
@@ -156,16 +169,16 @@ function App() {
             ))}
           </div>
 
-  <button type="submit">Submit</button>
-</form>
+          <button type="submit">Submit</button>
+        </form>
       )}
-  
+
       {components.length === 0 && (
         <div className="alert">No valid application found for that EEID</div>
       )}
     </div>
+
   );
 }
 
 export default App;
-
