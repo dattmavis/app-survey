@@ -53,7 +53,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: AUTH0_SECRET,
-  baseURL: 'https://app-survey.vercel.app/',
+  baseURL: 'http://localhost:3001',
   clientID: 'OQVv18aSMi4UuD41iXWvEvdgv8TwfAq5',
   issuerBaseURL: 'https://dev-8odjbliwttyqwb1h.us.auth0.com'
 };
