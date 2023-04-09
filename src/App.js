@@ -21,18 +21,15 @@ function App() {
     });
   };
 
-  
-const handleLogin = () => {
-  const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
-  loginWithRedirect({ redirectUri });
-};
+  const handleLogin = () => {
+    const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
+    loginWithRedirect({ redirectUri });
+  };
 
-const handleLogout = () => {
-  const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
-  logout({ returnTo: redirectUri });
-};
-
-
+  const handleLogout = () => {
+    const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
+    logout({ returnTo: redirectUri });
+  };
 
   useEffect(() => {
     async function fetchComponents() {
@@ -114,18 +111,16 @@ const handleLogout = () => {
 
   return (
     <div className="survey-container">
-      return(
-  <div className="login-container">
-    {isAuthenticated && <p>User: {user.name}</p>}
-    {eeid && (
-      <button
-        className="login-button"
-        onClick={isAuthenticated ? handleLogout : handleLogin}
-      >
-        {isAuthenticated ? "Sign Out" : "Log In"}
-      </button>
-    )}
-);
+      <div className="login-container">
+        {isAuthenticated && <p>User: {user.name}</p>}
+        {eeid && (
+          <button
+            className="login-button"
+            onClick={isAuthenticated ? handleLogout : handleLogin}
+          >
+            {isAuthenticated ? "Sign Out" : "Log In"}
+          </button>
+        )}
       </div>
       <div className="header-container">
         <div className="title-container">
