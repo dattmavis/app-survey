@@ -159,7 +159,7 @@ app.post("/components", async (req, res) => {
 
     const sourceComponentEEID = componentResponse.data.EEID;
 
-    console.log("EEID:", req.query.eeid);
+    console.log("EEID:", eeid);
 
     const connectionData = {
       Name: "Application Survey Connection",
