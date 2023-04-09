@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./style.css";
 
-
-
 function App() {
   const [components, setComponents] = useState([]);
   const [eeid, setEeid] = useState("");
@@ -51,10 +49,14 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const params = new URLSearchParams(window.location.search);
+    const eeid = params.get("eeid");
+
     const surveyData = {
       applicationName: components[0].Name,
       architectureName: components[0].ArchitectureName,
-      answers, eeid,
+      answers,
+      eeid,
     };
 
     console.log("Survey data to be sent:", surveyData);
@@ -94,7 +96,6 @@ function App() {
   }
 
   return (
-
     <div className="survey-container">
       <div className="header-container">
         <div className="title-container">
@@ -177,7 +178,6 @@ function App() {
         <div className="alert">No valid application found for that EEID</div>
       )}
     </div>
-
   );
 }
 
