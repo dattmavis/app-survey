@@ -11,8 +11,8 @@ const https = require('https');
 const fs = require('fs');
 
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/fullchain.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/vps.mattdav.is/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/vps.mattdav.is/fullchain.pem')
 };
 
 app.use(cors());
