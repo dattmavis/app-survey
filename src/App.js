@@ -106,6 +106,23 @@ function App() {
   return (
     <div className="survey-container">
       <div className="header-container">
+      {components.length === 0 && (
+            <div className="alert">
+              No valid application found for that EEID
+            </div>
+          )}
+  
+          {eeid && (
+            <button
+              onClick={() =>
+                loginWithRedirect({
+                  redirectUri: `${window.location.origin}/?eeid=${eeid}`,
+                })
+              }
+            >
+              Log In
+            </button>
+          )}
         <div className="title-container">
           <h1 className="title">Application Survey</h1>
           {components.map((component) => (
@@ -178,23 +195,6 @@ function App() {
             </form>
           )}
   
-          {components.length === 0 && (
-            <div className="alert">
-              No valid application found for that EEID
-            </div>
-          )}
-  
-          {eeid && (
-            <button
-              onClick={() =>
-                loginWithRedirect({
-                  redirectUri: `${window.location.origin}/?eeid=${eeid}`,
-                })
-              }
-            >
-              Log In
-            </button>
-          )}
         </div>
         <hr />
       </div>
