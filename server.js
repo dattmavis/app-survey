@@ -133,7 +133,7 @@ app.get("/questions", async (req, res) => {
 
 app.post("/components", async (req, res) => {
   try {
-    const { architectureName, applicationName, answers } = req.body;
+    const { architectureName, applicationName, answers, eeid } = req.body;
     const token = await getToken();
 
     const componentData = {
@@ -166,7 +166,7 @@ app.post("/components", async (req, res) => {
       ArchitectureName: architectureName,
       ConnectionTypeName: "Surveyed",
       SourceComponentEEID: sourceComponentEEID,
-      SinkComponentEEID: req.query.eeid,
+      SinkComponentEEID: eeid,
     };
 
     // Wait for 5 seconds before creating the connection

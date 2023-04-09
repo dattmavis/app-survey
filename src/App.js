@@ -54,7 +54,7 @@ function App() {
     const surveyData = {
       applicationName: components[0].Name,
       architectureName: components[0].ArchitectureName,
-      answers,
+      answers, eeid,
     };
 
     console.log("Survey data to be sent:", surveyData);
