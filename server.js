@@ -64,12 +64,13 @@ async function getToken() {
 const config = {
   authRequired: false,
   auth0Logout: true,
-  secret: AUTH0_SECRET,
-  baseURL: 'https://apps.mattdav.is',
+  secret: 'a long, randomly-generated string stored in env',
+  baseURL: 'https://surveys.mattdav.is',
   clientID: 'OQVv18aSMi4UuD41iXWvEvdgv8TwfAq5',
   issuerBaseURL: 'https://dev-8odjbliwttyqwb1h.us.auth0.com'
 };
 
+// auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
 // req.isAuthenticated is provided from the auth router
