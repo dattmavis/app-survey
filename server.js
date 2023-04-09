@@ -159,14 +159,14 @@ app.post("/components", async (req, res) => {
 
     const sourceComponentEEID = componentResponse.data.EEID;
 
-    console.log("EEID:", eeid);
+    console.log("Application Name:", applicationName);
 
     const connectionData = {
       Name: "Application Survey Connection",
       ArchitectureName: architectureName,
       ConnectionTypeName: "Surveyed",
       SourceComponentEEID: sourceComponentEEID,
-      SinkComponentEEID: eeid,
+      SinkComponentName: applicationName,
     };
 
     // Wait for 5 seconds before creating the connection
