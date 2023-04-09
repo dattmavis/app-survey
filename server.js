@@ -65,7 +65,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env',
-  baseURL: 'https://surveys.mattdav.is',
+  baseURL: 'https://vps.mattdav.is',
   clientID: 'OQVv18aSMi4UuD41iXWvEvdgv8TwfAq5',
   issuerBaseURL: 'https://dev-8odjbliwttyqwb1h.us.auth0.com'
 };
