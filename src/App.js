@@ -101,6 +101,8 @@ function App() {
     );
   }
 
+
+
   return (
     <div className="survey-container">
       <div className="header-container">
@@ -124,68 +126,81 @@ function App() {
         </div>
         <div className="logo-container">
           <img src="logo.png" alt="Logo" className="logo" />
-          <button onClick={() => loginWithRedirect()}>Log In</button>
         </div>
-      </div>
-
-      <hr />
-
-      {components.length > 0 && (
-        <form onSubmit={handleSubmit}>
-          <div className="question-container">
-            {questions.map((question) => (
-              <div
-                key={question.name}
-                className={
-                  showDescriptions[question.name]
-                    ? "question-card active"
-                    : "question-card"
-                }
-              >
-                <div
-                  className="question-title"
-                  onClick={() => toggleDescription(question.name)}
-                >
-                  <h2 className="question">{question.name}</h2>
-                  <span className="question-icon">
-                    {showDescriptions[question.name] ? "▲" : "ⓘ"}
-                  </span>
-                </div>
-                {showDescriptions[question.name] && (
-                  <div className="question-description">
-                    <p>{question.description}</p>
-                  </div>
-                )}
-                <div className="question-answer">
-                  <select
-                    className="answer"
-                    name={question.name}
-                    value={answers[question.name]}
-                    onChange={(e) =>
-                      handleAnswerChange(question.name, e.target.value)
+        <div>
+          {components.length > 0 && (
+            <form onSubmit={handleSubmit}>
+              <div className="question-container">
+                {questions.map((question) => (
+                  <div
+                    key={question.name}
+                    className={
+                      showDescriptions[question.name]
+                        ? "question-card active"
+                        : "question-card"
                     }
                   >
-                    <option value="">Select An Answer</option>
-                    <option value="5">5 - Perfect fit</option>
-                    <option value="4">4 - Good fit</option>
-                    <option value="3">3 - Average fit</option>
-                    <option value="2">2 - Poor fit</option>
-                    <option value="1">1 - No fit</option>
-                  </select>
-                </div>
+                    <div
+                      className="question-title"
+                      onClick={() => toggleDescription(question.name)}
+                    >
+                      <h2 className="question">{question.name}</h2>
+                      <span className="question-icon">
+                        {showDescriptions[question.name] ? "▲" : "ⓘ"}
+                      </span>
+                    </div>
+                    {showDescriptions[question.name] && (
+                      <div className="question-description">
+                        <p>{question.description}</p>
+                      </div>
+                    )}
+                    <div className="question-answer">
+                      <select
+                        className="answer"
+                        name={question.name}
+                        value={answers[question.name]}
+                        onChange={(e) =>
+                          handleAnswerChange(question.name, e.target.value)
+                        }
+                      >
+                        <option value="">Select An Answer</option>
+                        <option value="5">5 - Perfect fit</option>
+                        <option value="4">4 - Good fit</option>
+                        <option value="3">3 - Average fit</option>
+                        <option value="2">2 - Poor fit</option>
+                        <option value="1">1 - No fit</option>
+                      </select>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-
-          <button type="submit">Submit</button>
-        </form>
-      )}
-
-      {components.length === 0 && (
-        <div className="alert">No valid application found for that EEID</div>
-      )}
+              <button type="submit">Submit</button>
+            </form>
+          )}
+  
+          {components.length === 0 && (
+            <div className="alert">
+              No valid application found for that EEID
+            </div>
+          )}
+  
+          {eeid && (
+            <button
+              onClick={() =>
+                loginWithRedirect({
+                  redirectUri: `${window.location.origin}/?eeid=${eeid}`,
+                })
+              }
+            >
+              Log In
+            </button>
+          )}
+        </div>
+        <hr />
+      </div>
     </div>
   );
+  
 }
 
 export default App;
