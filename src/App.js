@@ -10,7 +10,7 @@ function App() {
   const [components, setComponents] = useState([]);
   const [eeid, setEeid] = useState("");
   const [questions, setQuestions] = useState([]);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState();
 
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
@@ -29,7 +29,6 @@ function App() {
     if (user?.name) {
       setAnswers({
         ...answers,
-        userName: user.name,
       });
     }
   }, [user]);
@@ -85,6 +84,7 @@ function App() {
       applicationName: components[0].Name,
       architectureName: components[0].ArchitectureName,
       answers,
+      userName: user.name,
     };
 
     console.log("Survey data to be sent:", surveyData);
