@@ -12,7 +12,7 @@ function App() {
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
 
-  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
   const handleAnswerChange = (questionName, answer) => {
     setAnswers({
@@ -20,6 +20,19 @@ function App() {
       [questionName]: answer,
     });
   };
+
+  
+const handleLogin = () => {
+  const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
+  loginWithRedirect({ redirectUri });
+};
+
+const handleLogout = () => {
+  const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
+  logout({ returnTo: redirectUri });
+};
+
+
 
   useEffect(() => {
     async function fetchComponents() {
@@ -102,19 +115,19 @@ function App() {
   return (
     <div className="survey-container">
       <div className="login-container">
-      {isAuthenticated && <p>User: {user.name}</p>}
-        {eeid && (
-          <button
-            className="login-button"
-            onClick={() =>
-              loginWithRedirect({
-                redirectUri: `${window.location.origin}/?eeid=${eeid}`,
-              })
-            }
-          >
-            Log In
-          </button>
-        )}
+      return (
+  <div className="login-container">
+    {isAuthenticated && <p>User: {user.name}</p>}
+    {eeid && (
+      <button
+        className="login-button"
+        onClick={isAuthenticated ? handleLogout : handleLogin}
+      >
+        {isAuthenticated ? "Sign Out" : "Log In"}
+      </button>
+    )}
+  </div>
+);
       </div>
       <div className="header-container">
         <div className="title-container">
