@@ -53,7 +53,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: AUTH0_SECRET,
-  baseURL: 'http://localhost:3001',
+  baseURL: 'https://45.33.16.100:3001',
   clientID: 'OQVv18aSMi4UuD41iXWvEvdgv8TwfAq5',
   issuerBaseURL: 'https://dev-8odjbliwttyqwb1h.us.auth0.com'
 };
@@ -205,6 +205,6 @@ app.post("/components", async (req, res) => {
   }
 });
 
-app.listen(3001, "45.33.7.162", () => {
+app.listen(3001, "45.33.16.100", () => {
   console.log("Server listening on port 3001");
 });
