@@ -10,6 +10,7 @@ function App() {
   const [components, setComponents] = useState([]);
   const [eeid, setEeid] = useState("");
   const [questions, setQuestions] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
 
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
@@ -91,6 +92,7 @@ function App() {
     try {
       await axios.post("https://vps.mattdav.is/components", surveyData);
       console.log("Survey data saved");
+      setSubmitted(true);
     } catch (error) {
       console.error("Error saving survey data:", error.message);
     }
@@ -124,7 +126,11 @@ function App() {
 
   return (
     <div className="survey-container">
-      <div className="login-container">
+      {submitted ? (
+        <div className="confirmation-message">Thank you for your submission!</div>
+      ) : (
+        <div>
+          <div className="login-container">
         {isAuthenticated && <p>User: {user.name}</p>}
         {eeid && (
           <button
@@ -209,9 +215,11 @@ function App() {
           )}
         </div>
         <hr />
+        </div>
       </div>
-    </div>
-  );
+    )}
+  </div>
+);
 }
 
 export default App;
