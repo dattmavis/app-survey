@@ -75,6 +75,23 @@ body {
 /* Login Container */
 
 .login-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.login-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.login-container {
   display: flex;
   align-items: center;
 }
