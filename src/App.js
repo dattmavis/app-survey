@@ -80,7 +80,6 @@ function App() {
       applicationName: components[0].Name,
       architectureName: components[0].ArchitectureName,
       answers,
-      userName: user.name,
     };
 
     console.log("Survey data to be sent:", surveyData);
