@@ -29,6 +29,7 @@ function App() {
     if (user?.name) {
       setAnswers({
         ...answers,
+        userName: user.name,
       });
     }
   }, [user]);
@@ -84,7 +85,6 @@ function App() {
       applicationName: components[0].Name,
       architectureName: components[0].ArchitectureName,
       answers,
-      userName: user.name,
     };
 
     console.log("Survey data to be sent:", surveyData);
