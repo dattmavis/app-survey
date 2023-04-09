@@ -134,7 +134,7 @@ app.get("/questions", async (req, res) => {
 
 app.post("/components", async (req, res) => {
   try {
-    const { architectureName, applicationName, answers, eeid } = req.body;
+    const { architectureName, applicationName, answers, userName } = req.body;
     const token = await getToken();
 
     const componentData = {
@@ -211,6 +211,9 @@ app.post("/components", async (req, res) => {
 
     // Wait for all the properties to be updated
     await Promise.all(propertiesPatchRequests);
+
+    console.log(`Survey data saved for user ${userName}`); // Log the user's name
+
 
     res.status(200).json({ success: true });
   } catch (error) {
