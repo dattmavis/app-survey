@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from "react-router-dom";
 
 import "./style.css";
 
 function App() {
+  const history = useHistory();
   const [components, setComponents] = useState([]);
   const [eeid, setEeid] = useState("");
   const [questions, setQuestions] = useState([]);
@@ -34,11 +36,13 @@ function App() {
   const handleLogin = () => {
     const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
     loginWithRedirect({ redirectUri });
+    history.push(`/?eeid=${eeid}`);
   };
 
   const handleLogout = () => {
     const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
     logout({ returnTo: redirectUri });
+    history.push(`/?eeid=${eeid}`);
   };
 
   useEffect(() => {
