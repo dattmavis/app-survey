@@ -4,7 +4,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import "./style.css";
 
-
 function App() {
   const [components, setComponents] = useState([]);
   const [eeid, setEeid] = useState("");
@@ -13,8 +12,7 @@ function App() {
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
 
-  const { loginWithRedirect } = useAuth0();
-  
+  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
 
   const handleAnswerChange = (questionName, answer) => {
     setAnswers({
@@ -101,28 +99,24 @@ function App() {
     );
   }
 
-
-
   return (
     <div className="survey-container">
+      <div className="login-container">
+      {isAuthenticated && <p>User: {user.name}</p>}
+        {eeid && (
+          <button
+            className="login-button"
+            onClick={() =>
+              loginWithRedirect({
+                redirectUri: `${window.location.origin}/?eeid=${eeid}`,
+              })
+            }
+          >
+            Log In
+          </button>
+        )}
+      </div>
       <div className="header-container">
-      {components.length === 0 && (
-            <div className="alert">
-              No valid application found for that EEID
-            </div>
-          )}
-  
-          {eeid && (
-            <button
-              onClick={() =>
-                loginWithRedirect({
-                  redirectUri: `${window.location.origin}/?eeid=${eeid}`,
-                })
-              }
-            >
-              Log In
-            </button>
-          )}
         <div className="title-container">
           <h1 className="title">Application Survey</h1>
           {components.map((component) => (
@@ -194,13 +188,11 @@ function App() {
               <button type="submit">Submit</button>
             </form>
           )}
-  
         </div>
         <hr />
       </div>
     </div>
   );
-  
 }
 
 export default App;
