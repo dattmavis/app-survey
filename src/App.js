@@ -34,15 +34,15 @@ function App() {
   }, [user]);
 
   const handleLogin = () => {
-    const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
+    const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     loginWithRedirect({ redirectUri });
-    history.push(`/?eeid=${eeid}`);
+    history.push(`/${window.location.pathname}?eeid=${eeid}`);
   };
 
   const handleLogout = () => {
-    const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
+    const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     logout({ returnTo: redirectUri });
-    history.push(`/?eeid=${eeid}`);
+    history.push(`/${window.location.pathname}?eeid=${eeid}`);
   };
 
   useEffect(() => {
