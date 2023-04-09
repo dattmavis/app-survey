@@ -16,6 +16,11 @@ const options = {
 };
 
 app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.use(bodyParser.json());
 
 const API_USERNAME = process.env.API_USERNAME;
