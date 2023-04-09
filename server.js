@@ -7,6 +7,14 @@ const { auth } = require('express-openid-connect');
 const app = express();
 const cors = require("cors");
 
+const https = require('https');
+const fs = require('fs');
+
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/fullchain.pem')
+};
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -48,17 +56,15 @@ async function getToken() {
   }
 }
 
-
 const config = {
   authRequired: false,
   auth0Logout: true,
   secret: AUTH0_SECRET,
-  baseURL: 'https://45.33.16.100:3001',
+  baseURL: 'https://apps.mattdav.is',
   clientID: 'OQVv18aSMi4UuD41iXWvEvdgv8TwfAq5',
   issuerBaseURL: 'https://dev-8odjbliwttyqwb1h.us.auth0.com'
 };
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
 // req.isAuthenticated is provided from the auth router
@@ -205,6 +211,6 @@ app.post("/components", async (req, res) => {
   }
 });
 
-app.listen(3001, "45.33.16.100", () => {
-  console.log("Server listening on port 3001");
+https.createServer(options, app).listen(443, () => {
+  console.log("Server listening on port 443");
 });

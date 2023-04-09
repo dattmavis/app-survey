@@ -27,8 +27,8 @@ function App() {
         if (eeid) {
           setEeid(eeid);
           const [componentsResponse, questionsResponse] = await Promise.all([
-            axios.get(`http://localhost:3001/components?eeid=${eeid}`),
-            axios.get(`http://localhost:3001/questions`),
+            axios.get(`https://vps.mattdav.is:3001/components?eeid=${eeid}`),
+            axios.get(`https://vps.mattdav.is:3001/questions`),
           ]);
           setComponents(componentsResponse.data.value);
           setQuestions(
@@ -60,7 +60,7 @@ function App() {
     console.log("Survey data to be sent:", surveyData);
 
     try {
-      await axios.post("http://localhost:3001/components", surveyData);
+      await axios.post("https://vps.mattdav.is:3001/components", surveyData);
       console.log("Survey data saved");
     } catch (error) {
       console.error("Error saving survey data:", error.message);
