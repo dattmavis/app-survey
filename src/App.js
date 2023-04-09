@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "./style.css";
 
@@ -12,6 +12,9 @@ function App() {
 
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
+
+  const { loginWithRedirect } = useAuth0();
+  
 
   const handleAnswerChange = (questionName, answer) => {
     setAnswers({
@@ -121,6 +124,7 @@ function App() {
         </div>
         <div className="logo-container">
           <img src="logo.png" alt="Logo" className="logo" />
+          <button onClick={() => loginWithRedirect()}>Log In</button>
         </div>
       </div>
 
