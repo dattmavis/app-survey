@@ -205,6 +205,6 @@ app.post("/components", async (req, res) => {
   }
 });
 
-app.listen(3001, "0.0.0.0", () => {
+app.listen(3001, "198.58.125.182", () => {
   console.log("Server listening on port 3001");
 });
