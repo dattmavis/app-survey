@@ -21,6 +21,16 @@ function App() {
     });
   };
 
+  useEffect(() => {
+    // Update the survey data when the user object becomes available
+    if (user?.name) {
+      setAnswers({
+        ...answers,
+        userName: user.name,
+      });
+    }
+  }, [user]);
+
   const handleLogin = () => {
     const redirectUri = `${window.location.origin}/?eeid=${eeid}`;
     loginWithRedirect({ redirectUri });
