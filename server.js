@@ -208,6 +208,21 @@ app.post("/components", async (req, res) => {
         );
       }
     );
+    
+    propertiesPatchRequests.push(
+      axios.patch(
+        `${API_URL}/api/Components(${sourceComponentEEID})/Properties('Q|userName')`,
+        { Value: answers.userName },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+    );
+    
+    // Wait for all the properties to be updated
+    await Promise.all(propertiesPatchRequests);
 
     // Wait for all the properties to be updated
     await Promise.all(propertiesPatchRequests);

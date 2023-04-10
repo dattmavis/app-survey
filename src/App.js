@@ -5,6 +5,9 @@ import { useHistory } from "react-router-dom";
 
 import "./style.css";
 
+// Check if the user is already logged in
+const isLoggedIn = localStorage.getItem('isLoggedIn');
+
 function App() {
   const history = useHistory();
   const [components, setComponents] = useState([]);
@@ -14,8 +17,9 @@ function App() {
 
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isLoggedIn'));
 
-  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
+  const { user, loginWithRedirect, logout } = useAuth0();
 
   const handleAnswerChange = (questionName, answer) => {
     setAnswers({
@@ -37,13 +41,15 @@ function App() {
   const handleLogin = () => {
     const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     loginWithRedirect({ redirectUri });
-    history.push(`/${window.location.pathname}?eeid=${eeid}`);
-  };
+    setIsAuthenticated(true);
+    localStorage.setItem('isLoggedIn', true);
+   };
 
   const handleLogout = () => {
     const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     logout({ returnTo: redirectUri });
-    history.push(`/${window.location.pathname}?eeid=${eeid}`);
+    setIsAuthenticated(false);
+    localStorage.removeItem('isLoggedIn');
   };
 
   useEffect(() => {
@@ -126,22 +132,13 @@ function App() {
 
   return (
     <div className="survey-container">
-      {submitted ? (
-        <div className="confirmation-message">Thank you for your submission!</div>
-      ) : (
+      {isAuthenticated ? (
         <div>
           <div className="login-container">
-        {isAuthenticated && <p>User: {user.name}</p>}
-        {eeid && (
-          <button
-            className="login-button"
-            onClick={isAuthenticated ? handleLogout : handleLogin}
-          >
-            {isAuthenticated ? "Sign Out" : "Log In"}
-          </button>
-        )}
-      </div>
-      <div className="header-container">
+            <p>User: {user.name}</p>
+            <button className="login-button" onClick={handleLogout}>Log Out</button>
+          </div>
+          <div className="header-container">
         <div className="title-container">
           <h1 className="title">Application Survey</h1>
           {components.map((component) => (
@@ -216,6 +213,11 @@ function App() {
         </div>
         <hr />
         </div>
+      </div>
+    ) : (
+      <div className="login-message">
+        <p>Please log in to view the survey.</p>
+        <button className="login-button" onClick={handleLogin}>Log In</button>
       </div>
     )}
   </div>
