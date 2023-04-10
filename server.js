@@ -188,25 +188,23 @@ app.post("/components", async (req, res) => {
       }
     }, 5000);
 
-    const propertiesPatchRequests = Object.entries(answers).map(
-      ([question, answer]) => {
-        const property = {
-          Type: "Q",
-          Name: question,
-          Value: answer,
-        };
-        console.log("Property to be sent:", property);
-        return axios.patch(
-          `${API_URL}/api/Components(${sourceComponentEEID})/Properties('${property.Type}|${property.Name}')`,
-          { Value: property.Value },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-      }
-    );
+    const propertiesPatchRequests = answers.map((answer) => {
+      const property = {
+        Type: "Q",
+        Name: answer.name,
+        Value: answer.value,
+      };
+      console.log("Property to be sent:", property);
+      return axios.patch(
+        `${API_URL}/api/Components(${sourceComponentEEID})/Properties('${property.Type}|${property.Name}')`,
+        { Value: property.Value },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    });
     
     // Add patch request to update "Completed By" property
     propertiesPatchRequests.push(
