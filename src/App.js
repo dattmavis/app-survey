@@ -24,6 +24,10 @@ function App() {
     });
   };
 
+    // Set the redirectUri when the component mounts
+    useEffect(() => {
+      setRedirectUri(`${window.location.origin}${window.location.pathname}`);
+    }, []);
 
   const handleLogin = () => {
     localStorage.setItem("eeid", window.location.search.split("=")[1]);
