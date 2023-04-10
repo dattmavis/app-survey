@@ -15,7 +15,7 @@ function App() {
   const [showDescriptions, setShowDescriptions] = useState({});
   
 
-  const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { user, loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
 
   const handleAnswerChange = (questionName, answer) => {
     setAnswers({
@@ -26,15 +26,16 @@ function App() {
 
 
   const handleLogin = () => {
+    const redirectUri = `${window.location.origin}/`;
     const eeid = localStorage.getItem("eeid");
-    const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
-    loginWithRedirect({ redirectUri });
+    const appState = { target: `${redirectUri}?eeid=${eeid}` };
+    loginWithRedirect({ appState });
   };
 
   const handleLogout = () => {
     const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     localStorage.removeItem("eeid"); // remove eeid from localStorage on logout
-    logout({ returnTo: "https://surveys.mattdav.is/" });
+    logout({ returnTo: redirectUri });
 
   };
 
@@ -209,7 +210,11 @@ function App() {
     ) : (
       <div className="login-message">
         <p>Please log in to view the survey.</p>
-        <button className="login-button" onClick={handleLogin}>Log In</button>
+        {!isLoading && (
+  <button onClick={handleLogin}>
+    Log In
+  </button>
+)}
       </div>
     )}
   </div>
