@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 import "./style.css";
 
@@ -9,7 +10,7 @@ function App() {
   const [components, setComponents] = useState([]);
   const [eeid, setEeid] = useState("");
   const [questions, setQuestions] = useState([]);
-
+  const navigate = useNavigate();
 
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
