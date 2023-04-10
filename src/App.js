@@ -3,8 +3,18 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import "./style.css";
+import Callback from './callback';
 
 function App() {
+
+
+  return (
+    <div>
+      {window.location.pathname === '/callback' ? <Callback /> : <MyApp />}
+    </div>
+  );
+
+
 
   const [components, setComponents] = useState([]);
   const [eeid, setEeid] = useState("");
@@ -14,8 +24,13 @@ function App() {
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
   
+   const { user, loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
 
-  const { user, loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
+   const generateNonce = () => {
+    const randomValue = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    localStorage.setItem("nonce", randomValue);
+    return randomValue;
+  }
 
   const handleAnswerChange = (questionName, answer) => {
     setAnswers({
@@ -26,10 +41,12 @@ function App() {
 
 
   const handleLogin = () => {
-    const redirectUri = `${window.location.origin}/`;
-    const eeid = localStorage.getItem("eeid");
-    const appState = { target: `${redirectUri}?eeid=${eeid}` };
-    loginWithRedirect({ appState });
+    const nonce = generateNonce();
+    localStorage.setItem("eeid", window.location.search.split("=")[1]);
+    loginWithRedirect({
+      appState: { targetUrl: `${window.location.origin}${window.location.pathname}?eeid=${localStorage.getItem("eeid")}` },
+      state: nonce,
+    });
   };
 
   const handleLogout = () => {
