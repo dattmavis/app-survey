@@ -17,9 +17,8 @@ function App() {
 
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isLoggedIn'));
 
-  const { user, loginWithRedirect, logout } = useAuth0();
+  const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   const handleAnswerChange = (questionName, answer) => {
     setAnswers({
@@ -27,10 +26,6 @@ function App() {
       [questionName]: answer,
     });
   };
-
-  useEffect(() => {
-    setIsAuthenticated(isLoggedIn);
-  }, []);
 
   useEffect(() => {
     // Update the survey data when the user object becomes available
@@ -45,15 +40,12 @@ function App() {
   const handleLogin = () => {
     const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     loginWithRedirect({ redirectUri });
-    setIsAuthenticated(true);
-    localStorage.setItem('isLoggedIn', true);
    };
 
   const handleLogout = () => {
     const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     logout({ returnTo: redirectUri });
-    setIsAuthenticated(false);
-    localStorage.removeItem('isLoggedIn');
+
   };
 
   useEffect(() => {
