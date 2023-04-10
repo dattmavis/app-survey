@@ -14,7 +14,7 @@ function App() {
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
 
-  const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { user, loginWithRedirect, logout, isAuthenticated, getIdTokenClaims } = useAuth0();
 
   const handleAnswerChange = (questionName, answer) => {
     setAnswers({
@@ -23,14 +23,19 @@ function App() {
     });
   };
 
+
   const handleLogin = () => {
     localStorage.setItem("eeid", window.location.search.split("=")[1]);
-    const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
+    getIdTokenClaims().then((claims) => {
+      const redirectUri = claims.redirectUri + "?eeid=" + eeid;
+      loginWithRedirect({ redirectUri }); });
     loginWithRedirect({ redirectUri });
    };
 
   const handleLogout = () => {
-    const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
+    getIdTokenClaims().then((claims) => {
+      const redirectUri = claims.redirectUri + "?eeid=" + eeid;
+      loginWithRedirect({ redirectUri }); });
     localStorage.removeItem("eeid"); // remove eeid from localStorage on logout
     logout({ returnTo: redirectUri });
 
