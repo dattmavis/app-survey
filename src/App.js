@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useHistory } from "react-router-dom";
 
 import "./style.css";
 
-// Check if the user is already logged in
-const isLoggedIn = localStorage.getItem('isLoggedIn');
-
 function App() {
-  const history = useHistory();
+
   const [components, setComponents] = useState([]);
   const [eeid, setEeid] = useState("");
   const [questions, setQuestions] = useState([]);
-  const [submitted, setSubmitted] = useState();
+
 
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
@@ -122,15 +118,6 @@ function App() {
     return (
       <div className="survey-container">
         <div className="alert">No Valid Application EEID Specified</div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <div className="survey-container">
-        <div className="alert">You are not logged in</div>
-        <button className="login-button" onClick={handleLogin}>Log In</button>
       </div>
     );
   }
