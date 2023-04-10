@@ -126,6 +126,15 @@ function App() {
     );
   }
 
+  if (!isAuthenticated) {
+    return (
+      <div className="survey-container">
+        <div className="alert">You are not logged in</div>
+        <button className="login-button" onClick={handleLogin}>Log In</button>
+      </div>
+    );
+  }
+
   return (
     <div className="survey-container">
       {isAuthenticated ? (
