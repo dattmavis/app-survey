@@ -28,6 +28,7 @@ body {
 }
 
 
+
 .survey-container::before {
   content: "";
   position: absolute;
@@ -74,10 +75,11 @@ body {
 
 /* Login Container */
 
+
+
 .login-container {
-  position: absolute;
-  top: 0;
-  right: 0;
+  display: flex;
+  align-items: center;
 }
 
 .login-button {
@@ -92,14 +94,14 @@ body {
 }
 
 .login-container {
-  display: flex;
-  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 @media (max-width: 768px) {
   .login-container {
-    flex-direction: column;
-    align-items: flex-end;
+    position: relative;
     margin-bottom: 20px;
   }
 }
@@ -120,6 +122,25 @@ body {
     margin-bottom: 20px;
   }
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #c9cfd7;
+  color: #fff;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info p {
+  margin-right: 10px;
+}
+
 
 /* Heading styles */
 h1 {
