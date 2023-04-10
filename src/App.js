@@ -29,6 +29,10 @@ function App() {
   };
 
   useEffect(() => {
+    setIsAuthenticated(isLoggedIn);
+  }, []);
+
+  useEffect(() => {
     // Update the survey data when the user object becomes available
     if (user?.name) {
       setAnswers({
