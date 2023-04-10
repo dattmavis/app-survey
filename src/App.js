@@ -26,11 +26,9 @@ function App() {
 
 
   const handleLogin = () => {
-    localStorage.setItem("eeid", window.location.search.split("=")[1]);
-    const redirectUriBase = "https://surveys.mattdav.is";
-    loginWithRedirect({
-      redirectUri: redirectUriBase + "?eeid=" + eeid,
-    });
+    const eeid = localStorage.getItem("eeid");
+    const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
+    loginWithRedirect({ redirectUri });
   };
 
   const handleLogout = () => {
