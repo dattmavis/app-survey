@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import SubmissionList from "./SubmissionList";
 
 import "./style.css";
 
@@ -13,6 +14,7 @@ function App() {
 
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
   
 
   const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
@@ -93,6 +95,7 @@ function App() {
     try {
       await axios.post("https://vps.mattdav.is/components", surveyData);
       console.log("Survey data saved");
+      setIsSubmitted(true); // set isSubmitted to true after the form has been submitted
     } catch (error) {
       console.error("Error saving survey data:", error.message);
     }
@@ -125,14 +128,14 @@ function App() {
   }
 
   return (
-    <div className="survey-container">
-      {isAuthenticated ? (
-        <div>
-          <div className="login-container">
-            <p>User: {user.name}</p>
-            <button className="login-button" onClick={handleLogout}>Log Out</button>
-          </div>
-          <div className="header-container">
+<div className="survey-container">
+  {isAuthenticated ? (
+    <div>
+      <div className="login-container">
+        <p>User: {user.name}</p>
+        <button className="login-button" onClick={handleLogout}>Log Out</button>
+      </div>
+      <div className="header-container">
         <div className="title-container">
           <h1 className="title">Application Survey</h1>
           {components.map((component) => (
@@ -206,16 +209,18 @@ function App() {
           )}
         </div>
         <hr />
-        </div>
       </div>
-    ) : (
-      <div className="login-message">
-        <p>Please log in to view the survey.</p>
-        <button className="login-button" onClick={handleLogin}>Log In</button>
-      </div>
-    )}
-  </div>
-);
+      {isSubmitted && <SubmissionList />}
+    </div>
+  ) : (
+    <div className="login-message">
+      <p>Please log in to view the survey.</p>
+      <button className="login-button" onClick={handleLogin}>Log In</button>
+    </div>
+  )}
+</div>
+
+  );
 }
 
 export default App;
