@@ -82,17 +82,6 @@ function App() {
     };
   
     console.log("Survey data to be sent:", surveyData);
-  
-    try {
-      await axios.post("https://vps.mattdav.is/components", surveyData);
-      console.log("Survey data saved");
-    } catch (error) {
-      console.error("Error saving survey data:", error.message);
-    }
-  };
-
-
-    console.log("Survey data to be sent:", surveyData);
 
     try {
       await axios.post("https://vps.mattdav.is/components", surveyData);

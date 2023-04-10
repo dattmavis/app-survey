@@ -207,24 +207,22 @@ app.post("/components", async (req, res) => {
       }
     );
     
-// Add patch request to update "Completed By" property
-propertiesPatchRequests.push(
-  axios.patch(
-    `${API_URL}/api/Components(${sourceComponentEEID})/Properties('Information|Completed By')`,
-    { Value: userName },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  )
-);
+    // Add patch request to update "Completed By" property
+    propertiesPatchRequests.push(
+      axios.patch(
+        `${API_URL}/api/Components(${sourceComponentEEID})/Properties('Information|Completed By')`,
+        { Value: userName },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+    );
     
     // Wait for all the properties to be updated
     await Promise.all(propertiesPatchRequests);
-
-    // Wait for all the properties to be updated
-    await Promise.all(propertiesPatchRequests);
+    
 
     console.log(`Survey data saved for user ${userName}`); // Log the user's name
 
