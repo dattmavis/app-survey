@@ -23,16 +23,6 @@ function App() {
     });
   };
 
-  useEffect(() => {
-    // Update the survey data when the user object becomes available
-    if (user?.name) {
-      setAnswers({
-        ...answers,
-        userName: user.name,
-      });
-    }
-  }, [user]);
-
   const handleLogin = () => {
     localStorage.setItem("eeid", window.location.search.split("=")[1]);
     const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
@@ -77,15 +67,30 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     const eeid = localStorage.getItem("eeid");
-
+  
     const surveyData = {
       applicationName: components[0].Name,
       architectureName: components[0].ArchitectureName,
-      answers,
       eeid,
+      userName: user?.name, // add the userName property here
+      answers: Object.entries(answers).map(([question, answer]) => ({
+        name: question,
+        value: answer,
+      })),
     };
+  
+    console.log("Survey data to be sent:", surveyData);
+  
+    try {
+      await axios.post("https://vps.mattdav.is/components", surveyData);
+      console.log("Survey data saved");
+    } catch (error) {
+      console.error("Error saving survey data:", error.message);
+    }
+  };
+
 
     console.log("Survey data to be sent:", surveyData);
 

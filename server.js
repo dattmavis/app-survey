@@ -134,7 +134,7 @@ app.get("/questions", async (req, res) => {
 
 app.post("/components", async (req, res) => {
   try {
-    const { architectureName, applicationName, answers, userName, eeid } = req.body;
+    const { architectureName, applicationName, answers, eeid, userName } = req.body;
     const token = await getToken();
 
     const componentData = {
@@ -160,9 +160,7 @@ app.post("/components", async (req, res) => {
 
     const sourceComponentEEID = componentResponse.data.EEID;
 
-    console.log("Application Name:", applicationName);
-
-    const connectionData = {
+     const connectionData = {
       Name: "Application Survey Connection",
       ArchitectureName: architectureName,
       ConnectionTypeName: "Surveyed",
