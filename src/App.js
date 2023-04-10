@@ -95,6 +95,7 @@ function App() {
     try {
       await axios.post("https://vps.mattdav.is/components", surveyData);
       console.log("Survey data saved");
+      localStorage.setItem('surveyData', JSON.stringify(surveyData));
       setIsSubmitted(true); // set isSubmitted to true after the form has been submitted
     } catch (error) {
       console.error("Error saving survey data:", error.message);
