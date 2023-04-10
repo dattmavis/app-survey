@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useHistory } from 'react-router-dom';
 
 import "./style.css";
 
@@ -28,10 +27,9 @@ function App() {
 
   const handleLogin = () => {
     localStorage.setItem("eeid", window.location.search.split("=")[1]);
-    loginWithRedirect({
-      redirectUri: `${window.location.origin}${window.location.pathname}`,
-      appState: { eeid }
-    });
+    const redirectUri = `${window.location.origin}${window.location.pathname}`;
+    navigate(`${redirectUri}?eeid=${localStorage.getItem("eeid")}`);
+    loginWithRedirect();
   };
 
   const handleLogout = () => {
@@ -41,23 +39,6 @@ function App() {
 
   };
 
-  // In the useEffect hook
-useEffect(() => {
-  const history = useHistory();
-  const eeid = localStorage.getItem("eeid");
-  if (eeid) {
-    // Remove the "eeid" parameter from the URL
-    const urlWithoutEeid = `${window.location.origin}${window.location.pathname}`;
-    window.history.replaceState({}, document.title, urlWithoutEeid);
-
-    // Append the "eeid" parameter to the URL after redirecting
-    const { eeid } = appState || {};
-    if (eeid) {
-      const urlWithEeid = `${window.location.href}?eeid=${eeid}`;
-      window.history.replaceState({}, document.title, urlWithEeid);
-    }
-  }
-}, [appState]);
 
   useEffect(() => {
     async function fetchComponents() {
