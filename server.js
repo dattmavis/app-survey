@@ -134,7 +134,7 @@ app.get("/questions", async (req, res) => {
 
 app.post("/components", async (req, res) => {
   try {
-    const { architectureName, applicationName, answers, userName } = req.body;
+    const { architectureName, applicationName, answers, userName, eeid } = req.body;
     const token = await getToken();
 
     const componentData = {
@@ -167,7 +167,7 @@ app.post("/components", async (req, res) => {
       ArchitectureName: architectureName,
       ConnectionTypeName: "Surveyed",
       SourceComponentEEID: sourceComponentEEID,
-      SinkComponentName: applicationName,
+      SinkComponentEEID: eeid,
     };
 
     // Wait for 5 seconds before creating the connection
@@ -209,17 +209,18 @@ app.post("/components", async (req, res) => {
       }
     );
     
-    propertiesPatchRequests.push(
-      axios.patch(
-        `${API_URL}/api/Components(${sourceComponentEEID})/Properties('Q|userName')`,
-        { Value: answers.userName },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-    );
+// Add patch request to update "Completed By" property
+propertiesPatchRequests.push(
+  axios.patch(
+    `${API_URL}/api/Components(${sourceComponentEEID})/Properties('Information|Completed By')`,
+    { Value: userName },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+);
     
     // Wait for all the properties to be updated
     await Promise.all(propertiesPatchRequests);
