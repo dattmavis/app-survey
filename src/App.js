@@ -27,16 +27,16 @@ function App() {
 
   const handleLogin = () => {
     localStorage.setItem("eeid", window.location.search.split("=")[1]);
-    const redirectUri = window.location.href
+    const redirectUriBase = "https://surveys.mattdav.is";
     loginWithRedirect({
-      redirectUri: redirectUri,
+      redirectUri: redirectUriBase + "?eeid=" + eeid,
     });
   };
 
   const handleLogout = () => {
     const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     localStorage.removeItem("eeid"); // remove eeid from localStorage on logout
-    logout({ returnTo: redirectUri });
+    logout({ returnTo: "https://surveys.mattdav.is/" });
 
   };
 
