@@ -35,6 +35,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem("eeid"); // remove eeid from localStorage on logout
+    const redirectUri = window.location.origin;
     logout({ returnTo: redirectUri });
 
   };
