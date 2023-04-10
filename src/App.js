@@ -27,9 +27,9 @@ function App() {
 
   const handleLogin = () => {
     localStorage.setItem("eeid", window.location.search.split("=")[1]);
-    const redirectUriBase = `${window.location.origin}${window.location.pathname}`;
+    const redirectUri = window.location.href
     loginWithRedirect({
-      redirectUri: `${redirectUriBase}?eeid=${localStorage.getItem("eeid")}`,
+      redirectUri: redirectUri,
     });
   };
 
