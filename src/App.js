@@ -34,12 +34,14 @@ function App() {
   }, [user]);
 
   const handleLogin = () => {
+    localStorage.setItem("eeid", window.location.search.split("=")[1]);
     const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     loginWithRedirect({ redirectUri });
    };
 
   const handleLogout = () => {
     const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
+    localStorage.removeItem("eeid"); // remove eeid from localStorage on logout
     logout({ returnTo: redirectUri });
 
   };
@@ -76,13 +78,13 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const params = new URLSearchParams(window.location.search);
-    const eeid = params.get("eeid");
+    const eeid = localStorage.getItem("eeid");
 
     const surveyData = {
       applicationName: components[0].Name,
       architectureName: components[0].ArchitectureName,
       answers,
+      eeid,
     };
 
     console.log("Survey data to be sent:", surveyData);
