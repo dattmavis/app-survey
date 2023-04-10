@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from 'react-router-dom';
 
 import "./style.css";
 
@@ -13,8 +14,9 @@ function App() {
 
   const [answers, setAnswers] = useState({});
   const [showDescriptions, setShowDescriptions] = useState({});
+  
 
-  const { user, loginWithRedirect, logout, isAuthenticated, getIdTokenClaims } = useAuth0();
+  const { user, loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   const handleAnswerChange = (questionName, answer) => {
     setAnswers({
@@ -26,20 +28,36 @@ function App() {
 
   const handleLogin = () => {
     localStorage.setItem("eeid", window.location.search.split("=")[1]);
-    getIdTokenClaims().then((claims) => {
-      const redirectUri = claims.redirectUri + "?eeid=" + eeid;
-      loginWithRedirect({ redirectUri }); });
-    loginWithRedirect({ redirectUri });
-   };
+    loginWithRedirect({
+      redirectUri: `${window.location.origin}${window.location.pathname}`,
+      appState: { eeid }
+    });
+  };
 
   const handleLogout = () => {
-    getIdTokenClaims().then((claims) => {
-      const redirectUri = claims.redirectUri + "?eeid=" + eeid;
-      loginWithRedirect({ redirectUri }); });
+    const redirectUri = `${window.location.origin}${window.location.pathname}?eeid=${eeid}`;
     localStorage.removeItem("eeid"); // remove eeid from localStorage on logout
     logout({ returnTo: redirectUri });
 
   };
+
+  // In the useEffect hook
+useEffect(() => {
+  const history = useHistory();
+  const eeid = localStorage.getItem("eeid");
+  if (eeid) {
+    // Remove the "eeid" parameter from the URL
+    const urlWithoutEeid = `${window.location.origin}${window.location.pathname}`;
+    window.history.replaceState({}, document.title, urlWithoutEeid);
+
+    // Append the "eeid" parameter to the URL after redirecting
+    const { eeid } = appState || {};
+    if (eeid) {
+      const urlWithEeid = `${window.location.href}?eeid=${eeid}`;
+      window.history.replaceState({}, document.title, urlWithEeid);
+    }
+  }
+}, [appState]);
 
   useEffect(() => {
     async function fetchComponents() {
