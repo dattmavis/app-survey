@@ -210,11 +210,7 @@ function App() {
     ) : (
       <div className="login-message">
         <p>Please log in to view the survey.</p>
-        {!isLoading && (
-  <button onClick={handleLogin}>
-    Log In
-  </button>
-)}
+        <button className="login-button" onClick={handleLogin}>Log In</button>
       </div>
     )}
   </div>
