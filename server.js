@@ -135,6 +135,7 @@ app.get("/questions", async (req, res) => {
 app.post("/components", async (req, res) => {
   try {
     const { architectureName, applicationName, answers, eeid, userName } = req.body;
+    console.log("answers:", answers);
     const token = await getToken();
 
     const componentData = {
