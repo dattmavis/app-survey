@@ -1,7 +1,7 @@
 # Application Surveys for Avolution ABACUS
 
 Project aims to offer a robust solution for handling application surveys outside of the Enterprise dashboards.
-It does this by hosting a list of Application in MongoDB and serving them as part of a survey form in a React App.
+It uses Express for middleware to avoid CORS issues and serves results to a dynamic survey form in a React App.
 
 **Benefits:**
 
