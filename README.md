@@ -1,5 +1,8 @@
 # Application Surveys for Avolution ABACUS
 
+Project I worked on to extend product functionality on our platform.
+It's a good proof of concept not only for a working Application Surveys module, but also for handling forms in general, and interacting with the ABACUS REST API.
+
 Project aims to offer a robust solution for handling application surveys outside of the Enterprise dashboards.
 It uses Express for middleware to avoid CORS issues and serves results to a dynamic survey form in a React App.
 
