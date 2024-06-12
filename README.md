@@ -2,9 +2,9 @@
 
 This project extends the functionality of Avolution ABACUS by providing a robust solution for handling application surveys outside of the Enterprise dashboards. It serves as a proof of concept for a working Application Surveys module, handling forms, and interacting with the ABACUS REST API. 
 
+This project leverages Express to avoid CORS issues on the Enterprise server.
 
-
-The project leverages Express for middleware to avoid CORS issues and delivers results to a dynamic survey form in a React App.
+https://github.com/dattmavis/app-survey/assets/84292097/3c7d3bf0-8a6c-4a79-9de5-0286a5590d95
 
 ## Benefits
 
@@ -87,9 +87,10 @@ The project leverages Express for middleware to avoid CORS issues and delivers r
 4.  Push to the branch (`git push origin feature-branch`)
 5.  Create a new Pull Request
 
-## License
+## License & Disclaimer
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+This code is personally developed by me, and is not representative of Avolution Software in any way. I am not offering this in any official capacity to be supported by Avolution, making no promises or guarantees, no assurances of maintenace or security, and you should use any code or examples at your own risk.
 
 ## Contact
 
