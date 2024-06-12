@@ -89,8 +89,10 @@ https://github.com/dattmavis/app-survey/assets/84292097/3c7d3bf0-8a6c-4a79-9de5-
 
 ## License & Disclaimer
 
-This project is licensed under the MIT License. See the LICENSE file for details.
-This code is personally developed by me, and is not representative of Avolution Software in any way. I am not offering this in any official capacity to be supported by Avolution, making no promises or guarantees, no assurances of maintenace or security, and you should use any code or examples at your own risk.
+This project is unlicensed, and being provided to the public for demonstration purposes. The ABACUS REST API and all associated ABACUS Code belongs to Avolution Software.
+This App Survey code is personally developed by me, and I am not publishing it to be representative of any type of official extension to ABACUS or any other products offered by Avolution Software. 
+
+I highly suggest viewing this entirely as a proof of concept. I am not offering this in any official capacity to be supported by Avolution, making no promises or guarantees, no assurances of maintenace or security, and you should use any code or examples at your own risk.
 
 ## Contact
 
