@@ -8,7 +8,7 @@ https://github.com/dattmavis/app-survey/assets/84292097/3c7d3bf0-8a6c-4a79-9de5-
 
 ## Benefits
 
-- **Eliminates the need for Editor role**: Users can fill out surveys without requiring editor privileges.
+- **Enhanced Collaboration**: Users can fill out surveys to assist EA work.
 - **Responsive web interface**: Offers a cleaner and more responsive interface for filling out surveys.
 - **Dynamic survey generation**: Express routing implements automatic link generation, enabling new surveys to be dynamically created and workflows to be automated.
 - **Seamless embedding**: Enhances embedding in existing platforms and enables better task assignment.
